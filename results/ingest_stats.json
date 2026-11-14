@@ -1,0 +1,45 @@
+{
+  "A": {
+    "index": "A",
+    "chunks": 511,
+    "embedded_this_run": 511,
+    "pruned": 0,
+    "rows_in_db": 511,
+    "chars_total": 228511,
+    "len_min": 53,
+    "len_median": 500,
+    "len_mean": 447.2,
+    "len_max": 500,
+    "seconds": 36.87,
+    "est_tokens_embedded": 57127
+  },
+  "B": {
+    "index": "B",
+    "chunks": 290,
+    "embedded_this_run": 290,
+    "pruned": 0,
+    "rows_in_db": 290,
+    "chars_total": 208322,
+    "len_min": 57,
+    "len_median": 781.5,
+    "len_mean": 718.4,
+    "len_max": 1000,
+    "seconds": 20.8,
+    "est_tokens_embedded": 52080
+  },
+  "embedding": {
+    "versions": {
+      "psycopg": "3.3.6",
+      "google-genai": "3.0.0",
+      "pypdf": "6.21.2",
+      "python": "3.14.3"
+    },
+    "provider": "Gemini via google-genai (GEMINI_BASE_URL)",
+    "model": "gemini-embedding-001",
+    "dimensions": 768,
+    "task_type_doc": "RETRIEVAL_DOCUMENT",
+    "task_type_query": "RETRIEVAL_QUERY",
+    "metric": "cosine (exact scan, no ANN index)",
+    "run_at": "2026-11-14T03:51:20+00:00"
+  }
+}

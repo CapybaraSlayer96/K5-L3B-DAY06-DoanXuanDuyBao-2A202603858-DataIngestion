@@ -1,0 +1,74 @@
+{
+  "A|dev": {
+    "n": 17,
+    "hit1": 9,
+    "hit3": 15,
+    "page_match_top3": 17,
+    "filter_n": 3,
+    "filter_ok": 1
+  },
+  "A|all": {
+    "n": 22,
+    "hit1": 10,
+    "hit3": 18,
+    "page_match_top3": 20,
+    "filter_n": 4,
+    "filter_ok": 2
+  },
+  "A|test": {
+    "n": 5,
+    "hit1": 1,
+    "hit3": 3,
+    "page_match_top3": 3,
+    "filter_n": 1,
+    "filter_ok": 1
+  },
+  "B|dev": {
+    "n": 17,
+    "hit1": 15,
+    "hit3": 17,
+    "page_match_top3": 17,
+    "filter_n": 3,
+    "filter_ok": 1
+  },
+  "B|all": {
+    "n": 22,
+    "hit1": 17,
+    "hit3": 19,
+    "page_match_top3": 20,
+    "filter_n": 4,
+    "filter_ok": 2
+  },
+  "B|test": {
+    "n": 5,
+    "hit1": 2,
+    "hit3": 2,
+    "page_match_top3": 3,
+    "filter_n": 1,
+    "filter_ok": 1
+  },
+  "C|dev": {
+    "n": 17,
+    "hit1": 16,
+    "hit3": 17,
+    "page_match_top3": 17,
+    "filter_n": 3,
+    "filter_ok": 3
+  },
+  "C|all": {
+    "n": 22,
+    "hit1": 18,
+    "hit3": 19,
+    "page_match_top3": 20,
+    "filter_n": 4,
+    "filter_ok": 4
+  },
+  "C|test": {
+    "n": 5,
+    "hit1": 2,
+    "hit3": 2,
+    "page_match_top3": 3,
+    "filter_n": 1,
+    "filter_ok": 1
+  }
+}

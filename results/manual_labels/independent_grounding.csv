@@ -1,0 +1,244 @@
+strategy,question_id,question,expected_answer,gold,evidence_quote,top1,top2,top3,score_0_2,reason
+A,q18,What must the value used to guard against cross-site request forgery contain?,"A non-guessable value, bound to the user-agent's authenticated state.",rfc6749 p59,The binding value used for CSRF protection MUST contain a non-guessable value,"[rfc6749-p059-A04 p59] ate (e.g., session cookie, HTML5 local storage) MUST be kept in a location accessible only to the client and the user-agent (i.e., protected by same-origin policy).
+
+A CSRF attack against the authorization server's authorization endpoint can result in an attacker obtaining end-user authorization for a malicious client without involving or alerting the end-user.
+
+The authorization server MUST implement CSRF protection for its authorization endpoint and ensure that a malicious client cannot obtain","[rfc6749-p059-A03 p59] d-user, the authorization server redirects the end-user's user-agent back to the client with the required binding value contained in the ""state"" parameter. The binding value enables the client to verify the validity of the request by matching the binding value to the user-agent's authenticated state. The binding value used for CSRF protection MUST contain a non-guessable value (as described in Section 10.10), and the user-agent's authenticated state (e.g., session cookie, HTML5 local storage) MU","[rfc6749-p059-A01 p59] ence of a valid session cookie).
+
+A CSRF attack against the client's redirection URI allows an attacker to inject its own authorization code or access token, which can result in the client using an access token associated with the attacker's protected resources rather than the victim's (e.g., save the victim's bank account information to a protected resource controlled by the attacker).
+
+The client MUST implement CSRF protection for its redirection URI. This is typically accomplished by requirin",2,top2 states binding value MUST be non-guessable and tied to user-agent state; p59 traceable.
+A,q19,Should a refresh token accompany the access token in the client credentials flow?,A refresh token SHOULD NOT be included.,rfc6749 p42,A refresh token SHOULD NOT be included.,"[rfc6749-p022-A04 p22] r than revoking an entire set of
+   refresh tokens.
+
+o  Implementing authentication management best practices, which
+   require periodic credential rotation.  Rotation of an entire set
+   of refresh tokens can be challenging, while rotation of a single
+   set of client credentials is significantly easier.","[rfc6749-p044-A00 p44] refresh_token
+      OPTIONAL.  The refresh token, which can be used to obtain new
+      access tokens using the same authorization grant as described
+      in Section 6.
+
+scope
+      OPTIONAL, if identical to the scope requested by the client;
+      otherwise, REQUIRED.  The scope of the access token as
+      described by Section 3.3.
+
+The parameters are included in the entity-body of the HTTP response using the ""application/json"" media type as defined by [RFC4627]. The parameters are serialized","[rfc6749-p010-A04 p10] ns may have a shorter lifetime and fewer permissions than authorized by the resource owner). Issuing a refresh token is optional at the discretion of the authorization server. If the authorization server issues a refresh token, it is included when issuing an access token (i.e., step (D) in Figure 1).
+
+A refresh token is a string representing the authorization granted to the client by the resource owner. The string is usually opaque to the client. The token denotes an identifier used to retrieve ",0,No chunk says refresh token SHOULD NOT accompany client-credentials token; only generic refresh text.
+A,q20,"In the proof key extension, what error comes back when the verifier does not match the stored challenge?",An invalid_grant error response.,rfc7636 p10,"an error response indicating ""invalid_grant"" as described in Section 5.2 of [RFC6749] MUST be returned","[rfc7636-p013-A03 p13]  PKCE will simply ignore the unknown ""code_verifier"". Because of this, an error when ""S256"" is presented can only mean that the server is faulty or that a MITM attacker is trying a downgrade attack.
+
+The ""S256"" method protects against eavesdroppers observing or intercepting the ""code_challenge"", because the challenge cannot be used without the verifier. With the ""plain"" method, there is a chance that ""code_challenge"" will be observed by the attacker on the device or in the http request. Since th","[rfc7636-p018-A02 p18] lenge"":
+
+BASE64URL-ENCODE(SHA256(ASCII(code_verifier))) == code_challenge
+
+If the two values are equal, then the authorization server can provide the tokens as long as there are no other errors in the request. If the values are not equal, then the request must be rejected, and an error returned.","[rfc7636-p009-A03 p9] KCE) by OAuth public clients and the client does not send the ""code_challenge"" in the request, the authorization endpoint MUST return the authorization error response with the ""error"" value set to ""invalid_request"". The ""error_description"" or the response of ""error_uri"" SHOULD explain the nature of error, e.g., code challenge required.",1,top2 says unequal values are rejected with an error; invalid_grant never stated.
+A,q21,How much randomness should the secret verifier string carry?,A minimum of 256 bits of entropy.,rfc7636 p13,"The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy.","[rfc7636-p013-A01 p13] y Considerations
+
+7.1. Entropy of the code_verifier
+
+The security model relies on the fact that the code verifier is not learned or guessed by the attacker. It is vitally important to adhere to this principle. As such, the code verifier has to be created in such a manner that it is cryptographically random and has high entropy that it is not practical for the attacker to guess.
+
+The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy. This can be done by having a suitabl","[rfc7636-p017-A02 p17] he client uses output of a suitable random number generator to create a 32-octet sequence. The octets representing the value in this example (using JSON array notation) are:
+
+[116, 24, 223, 180, 151, 153, 224, 37, 79, 250, 96, 125, 216, 173, 187, 186, 22, 212, 37, 77, 105, 214, 191, 240, 91, 88, 5, 88, 83, 132, 141, 121]
+
+Encoding this octet sequence as base64url provides the value of the code_verifier:
+
+dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
+
+The code_verifier is then hashed via the SHA256","[rfc7636-p014-A02 p14] fier contains sufficient entropy to prevent brute-force attacks. Concatenating a publicly known value to a code verifier (containing 256 bits of entropy) and then hashing it with SHA256 to produce a code challenge would not increase the number of attempts necessary to brute force a valid value for code verifier.
+
+While the ""S256"" transformation is like hashing a password, there are important differences. Passwords tend to be relatively low-entropy words that can be hashed offline and the hash lo",2,top1 states verifier SHOULD have minimum 256 bits of entropy; p13 traceable.
+A,q22,How are the parts of a JSON web token separated?,By period characters; each part is base64url-encoded.,rfc7519 p6,A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters.,[rfc7519-p006-A04 p6] fe parts separated by period ('.') characters. Each part contains a base64url-encoded value. The number of parts in the JWT is dependent upon the representation of the resulting JWS using the JWS Compact Serialization or JWE using the JWE Compact Serialization.,"[rfc7519-p006-A03 p6] esented as a JWS and the claims are digitally signed or MACed, with the JWT Claims Set being the JWS Payload. If the JOSE Header is for a JWE, the JWT is represented as a JWE and the claims are encrypted, with the JWT Claims Set being the plaintext encrypted by the JWE. A JWT may be enclosed in another JWE or JWS structure to create a Nested JWT, enabling nested signing and encryption to be performed.
+
+A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters. Eac","[rfc7519-p013-A00 p13] The following is an example of a JWT Claims Set:
+
+{""iss"":""joe"",
+ ""exp"":1300819380,
+ ""http://example.com/is_root"":true}
+
+Base64url encoding the octets of the UTF-8 representation of the JWT Claims Set yields this encoded JWS Payload (with line breaks for display purposes only):
+
+eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ
+
+The encoded JWS Signature is the empty string.
+
+Concatenating these encoded parts in this order with period ('.') characters",2,top1 states JWT parts are separated by periods and base64url-encoded; p6 traceable.
+B,q18,What must the value used to guard against cross-site request forgery contain?,"A non-guessable value, bound to the user-agent's authenticated state.",rfc6749 p59,The binding value used for CSRF protection MUST contain a non-guessable value,"[rfc6749-p059-B01 p59] The client MUST implement CSRF protection for its redirection URI. This is typically accomplished by requiring any request sent to the redirection URI endpoint to include a value that binds the request to the user-agent's authenticated state (e.g., a hash of the session cookie used to authenticate the user-agent). The client SHOULD utilize the ""state"" request parameter to deliver this value to the authorization server when making an authorization request.","[rfc7636-p018-B01 p18] If the two values are equal, then the authorization server can provide the tokens as long as there are no other errors in the request. If the values are not equal, then the request must be rejected, and an error returned.",[rfc6749-p059-B03 p59] The authorization server MUST implement CSRF protection for its authorization endpoint and ensure that a malicious client cannot obtain authorization without the awareness and explicit consent of the resource owner.,1,top1 gives binding to authenticated state but omits non-guessable requirement; top2-3 off-topic.
+B,q19,Should a refresh token accompany the access token in the client credentials flow?,A refresh token SHOULD NOT be included.,rfc6749 p42,A refresh token SHOULD NOT be included.,"[rfc6749-p022-B02 p22] o  Recovering from a compromised client by disabling the client or
+   changing its credentials, thus preventing an attacker from abusing
+   stolen refresh tokens.  Changing a single set of client
+   credentials is significantly faster than revoking an entire set of
+   refresh tokens.
+
+o  Implementing authentication management best practices, which
+   require periodic credential rotation.  Rotation of an entire set
+   of refresh tokens can be challenging, while rotation of a single
+   set of client credentials is significantly easier.","[rfc6749-p010-B02 p10] Refresh tokens are credentials used to obtain access tokens. Refresh tokens are issued to the client by the authorization server and are used to obtain a new access token when the current access token becomes invalid or expires, or to obtain additional access tokens with identical or narrower scope (access tokens may have a shorter lifetime and fewer permissions than authorized by the resource owner). Issuing a refresh token is optional at the discretion of the authorization server. If the authorization server issues a refresh token, it is included when issuing an access token (i.e., step (D) in Figure 1).
+
+A refresh token is a string representing the authorization granted to the client by the resource owner. The string is usually opaque to the client. The token denotes an identifier used to retrieve the","[rfc6749-p044-B00 p44] refresh_token
+      OPTIONAL.  The refresh token, which can be used to obtain new
+      access tokens using the same authorization grant as described
+      in Section 6.
+
+scope
+      OPTIONAL, if identical to the scope requested by the client;
+      otherwise, REQUIRED.  The scope of the access token as
+      described by Section 3.3.
+
+The parameters are included in the entity-body of the HTTP response using the ""application/json"" media type as defined by [RFC4627]. The parameters are serialized into a JavaScript Object Notation (JSON) structure by adding each parameter at the highest structure level. Parameter names and string values are included as JSON strings. Numerical values are included as JSON numbers. The order of parameters does not matter and can vary.",0,No refresh-token statement for client credentials in top1-3; generic text only. Same chunks as C.
+B,q20,"In the proof key extension, what error comes back when the verifier does not match the stored challenge?",An invalid_grant error response.,rfc7636 p10,"an error response indicating ""invalid_grant"" as described in Section 5.2 of [RFC6749] MUST be returned","[rfc7636-p009-B01 p9] Typically, the ""code_challenge"" and ""code_challenge_method"" values are stored in encrypted form in the ""code"" itself but could alternatively be stored on the server associated with the code. The server MUST NOT include the ""code_challenge"" value in client requests in a form that other entities can extract.
+
+The exact method that the server uses to associate the ""code_challenge"" with the issued ""code"" is out of scope for this specification.
+
+4.4.1. Error Response
+
+If the server requires Proof Key for Code Exchange (PKCE) by OAuth public clients and the client does not send the ""code_challenge"" in the request, the authorization endpoint MUST return the authorization error response with the ""error"" value set to ""invalid_request"". The ""error_description"" or the response of ""error_uri"" SHOULD explain the nature of error, e.g., code challenge required.","[rfc7636-p018-B01 p18] If the two values are equal, then the authorization server can provide the tokens as long as there are no other errors in the request. If the values are not equal, then the request must be rejected, and an error returned.","[rfc7636-p005-B01 p5] To mitigate this attack, this extension utilizes a dynamically created cryptographically random key called ""code verifier"". A unique code verifier is created for every authorization request, and its transformed value, called ""code challenge"", is sent to the authorization server to obtain the authorization code. The authorization code obtained is then sent to the token endpoint with the ""code verifier"", and the server compares it with the previously received request code so that it can perform the proof of possession of the ""code verifier"" by the client. This works as the mitigation since the attacker would not know this one-time key, since it is sent over TLS and cannot be intercepted.
+
+1.1. Protocol Flow",1,Rejection on mismatch present in top2; invalid_grant error requirement absent.
+B,q21,How much randomness should the secret verifier string carry?,A minimum of 256 bits of entropy.,rfc7636 p13,"The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy.","[rfc7636-p013-B01 p13] The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy. This can be done by having a suitable random number generator create a 32-octet sequence. The octet sequence can then be base64url-encoded to produce a 43-octet URL safe string to use as a ""code_challenge"" that has the required entropy.
+
+7.2. Protection against Eavesdroppers
+
+Clients MUST NOT downgrade to ""plain"" after trying the ""S256"" method. Servers that support PKCE are required to support ""S256"", and servers that do not support PKCE will simply ignore the unknown ""code_verifier"". Because of this, an error when ""S256"" is presented can only mean that the server is faulty or that a MITM attacker is trying a downgrade attack.","[rfc7636-p008-B00 p8] 4. Protocol
+
+4.1. Client Creates a Code Verifier
+
+The client first creates a code verifier, ""code_verifier"", for each OAuth 2.0 [RFC6749] Authorization Request, in the following manner:
+
+code_verifier = high-entropy cryptographic random STRING using the unreserved characters [A-Z] / [a-z] / [0-9] / ""-"" / ""."" / ""_"" / ""~"" from Section 2.3 of [RFC3986], with a minimum length of 43 characters and a maximum length of 128 characters.
+
+ABNF for ""code_verifier"" is as follows.
+
+code-verifier = 43*128unreserved unreserved = ALPHA / DIGIT / ""-"" / ""."" / ""_"" / ""~"" ALPHA = %x41-5A / %x61-7A DIGIT = %x30-39
+
+NOTE: The code verifier SHOULD have enough entropy to make it impractical to guess the value. It is RECOMMENDED that the output of a suitable random number generator be used to create a 32-octet sequence. The octet sequence is then base64url-encoded to produce a 43-octet URL safe string to use as the code verifier.
+
+4.2. Client Creates the Code Challenge","[rfc7636-p017-B01 p17] The client uses output of a suitable random number generator to create a 32-octet sequence. The octets representing the value in this example (using JSON array notation) are:
+
+[116, 24, 223, 180, 151, 153, 224, 37, 79, 250, 96, 125, 216, 173, 187, 186, 22, 212, 37, 77, 105, 214, 191, 240, 91, 88, 5, 88, 83, 132, 141, 121]
+
+Encoding this octet sequence as base64url provides the value of the code_verifier:
+
+dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
+
+The code_verifier is then hashed via the SHA256 hash function to produce:
+
+[19, 211, 30, 150, 26, 26, 216, 236, 47, 22, 177, 12, 76, 152, 46,
+ 8, 118, 168, 120, 173, 109, 241, 68, 86, 110, 225, 137, 74, 203,
+ 112, 249, 195]",2,top1 states minimum 256 bits of entropy for code_verifier; p13 traceable.
+B,q22,How are the parts of a JSON web token separated?,By period characters; each part is base64url-encoded.,rfc7519 p6,A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters.,"[rfc7519-p006-B02 p6] The contents of the JOSE Header describe the cryptographic operations applied to the JWT Claims Set. If the JOSE Header is for a JWS, the JWT is represented as a JWS and the claims are digitally signed or MACed, with the JWT Claims Set being the JWS Payload. If the JOSE Header is for a JWE, the JWT is represented as a JWE and the claims are encrypted, with the JWT Claims Set being the plaintext encrypted by the JWE. A JWT may be enclosed in another JWE or JWS structure to create a Nested JWT, enabling nested signing and encryption to be performed.
+
+A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters. Each part contains a base64url-encoded value. The number of parts in the JWT is dependent upon the representation of the resulting JWS using the JWS Compact Serialization or JWE using the JWE Compact Serialization.","[rfc7519-p013-B00 p13] The following is an example of a JWT Claims Set:
+
+{""iss"":""joe"",
+ ""exp"":1300819380,
+ ""http://example.com/is_root"":true}
+
+Base64url encoding the octets of the UTF-8 representation of the JWT Claims Set yields this encoded JWS Payload (with line breaks for display purposes only):
+
+eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ
+
+The encoded JWS Signature is the empty string.
+
+Concatenating these encoded parts in this order with period ('.') characters between the parts yields this complete JWT (with line breaks for display purposes only):
+
+eyJhbGciOiJub25lIn0 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ .
+
+7. Creating and Validating JWTs
+
+7.1. Creating a JWT
+
+To create a JWT, the following steps are performed. The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.","[rfc7519-p006-B01 p6] JWTs represent a set of claims as a JSON object that is encoded in a JWS and/or JWE structure. This JSON object is the JWT Claims Set. As per Section 4 of RFC 7159 [RFC7159], the JSON object consists of zero or more name/value pairs (or members), where the names are strings and the values are arbitrary JSON values. These members are the claims represented by the JWT. This JSON object MAY contain whitespace and/or line breaks before or after any JSON values or structural characters, in accordance with Section 2 of RFC 7159 [RFC7159].
+
+The member names within the JWT Claims Set are referred to as Claim Names. The corresponding values are referred to as Claim Values.",2,"top1 states period-separated, base64url-encoded parts; p6 traceable."
+C,q18,What must the value used to guard against cross-site request forgery contain?,"A non-guessable value, bound to the user-agent's authenticated state.",rfc6749 p59,The binding value used for CSRF protection MUST contain a non-guessable value,"[rfc6749-p059-B01 p59] The client MUST implement CSRF protection for its redirection URI. This is typically accomplished by requiring any request sent to the redirection URI endpoint to include a value that binds the request to the user-agent's authenticated state (e.g., a hash of the session cookie used to authenticate the user-agent). The client SHOULD utilize the ""state"" request parameter to deliver this value to the authorization server when making an authorization request.","[rfc7636-p018-B01 p18] If the two values are equal, then the authorization server can provide the tokens as long as there are no other errors in the request. If the values are not equal, then the request must be rejected, and an error returned.",[rfc6749-p059-B03 p59] The authorization server MUST implement CSRF protection for its authorization endpoint and ensure that a malicious client cannot obtain authorization without the awareness and explicit consent of the resource owner.,1,"Identical chunks to B; binding to state present, non-guessable requirement missing."
+C,q19,Should a refresh token accompany the access token in the client credentials flow?,A refresh token SHOULD NOT be included.,rfc6749 p42,A refresh token SHOULD NOT be included.,"[rfc6749-p022-B02 p22] o  Recovering from a compromised client by disabling the client or
+   changing its credentials, thus preventing an attacker from abusing
+   stolen refresh tokens.  Changing a single set of client
+   credentials is significantly faster than revoking an entire set of
+   refresh tokens.
+
+o  Implementing authentication management best practices, which
+   require periodic credential rotation.  Rotation of an entire set
+   of refresh tokens can be challenging, while rotation of a single
+   set of client credentials is significantly easier.","[rfc6749-p010-B02 p10] Refresh tokens are credentials used to obtain access tokens. Refresh tokens are issued to the client by the authorization server and are used to obtain a new access token when the current access token becomes invalid or expires, or to obtain additional access tokens with identical or narrower scope (access tokens may have a shorter lifetime and fewer permissions than authorized by the resource owner). Issuing a refresh token is optional at the discretion of the authorization server. If the authorization server issues a refresh token, it is included when issuing an access token (i.e., step (D) in Figure 1).
+
+A refresh token is a string representing the authorization granted to the client by the resource owner. The string is usually opaque to the client. The token denotes an identifier used to retrieve the","[rfc6749-p044-B00 p44] refresh_token
+      OPTIONAL.  The refresh token, which can be used to obtain new
+      access tokens using the same authorization grant as described
+      in Section 6.
+
+scope
+      OPTIONAL, if identical to the scope requested by the client;
+      otherwise, REQUIRED.  The scope of the access token as
+      described by Section 3.3.
+
+The parameters are included in the entity-body of the HTTP response using the ""application/json"" media type as defined by [RFC4627]. The parameters are serialized into a JavaScript Object Notation (JSON) structure by adding each parameter at the highest structure level. Parameter names and string values are included as JSON strings. Numerical values are included as JSON numbers. The order of parameters does not matter and can vary.",0,No refresh-token statement for client credentials in top1-3. Same chunks as B.
+C,q20,"In the proof key extension, what error comes back when the verifier does not match the stored challenge?",An invalid_grant error response.,rfc7636 p10,"an error response indicating ""invalid_grant"" as described in Section 5.2 of [RFC6749] MUST be returned","[rfc7636-p009-B01 p9] Typically, the ""code_challenge"" and ""code_challenge_method"" values are stored in encrypted form in the ""code"" itself but could alternatively be stored on the server associated with the code. The server MUST NOT include the ""code_challenge"" value in client requests in a form that other entities can extract.
+
+The exact method that the server uses to associate the ""code_challenge"" with the issued ""code"" is out of scope for this specification.
+
+4.4.1. Error Response
+
+If the server requires Proof Key for Code Exchange (PKCE) by OAuth public clients and the client does not send the ""code_challenge"" in the request, the authorization endpoint MUST return the authorization error response with the ""error"" value set to ""invalid_request"". The ""error_description"" or the response of ""error_uri"" SHOULD explain the nature of error, e.g., code challenge required.","[rfc7636-p018-B01 p18] If the two values are equal, then the authorization server can provide the tokens as long as there are no other errors in the request. If the values are not equal, then the request must be rejected, and an error returned.","[rfc7636-p005-B01 p5] To mitigate this attack, this extension utilizes a dynamically created cryptographically random key called ""code verifier"". A unique code verifier is created for every authorization request, and its transformed value, called ""code challenge"", is sent to the authorization server to obtain the authorization code. The authorization code obtained is then sent to the token endpoint with the ""code verifier"", and the server compares it with the previously received request code so that it can perform the proof of possession of the ""code verifier"" by the client. This works as the mitigation since the attacker would not know this one-time key, since it is sent over TLS and cannot be intercepted.
+
+1.1. Protocol Flow",1,"Identical chunks to B; mismatch rejection present, invalid_grant absent."
+C,q21,How much randomness should the secret verifier string carry?,A minimum of 256 bits of entropy.,rfc7636 p13,"The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy.","[rfc7636-p013-B01 p13] The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy. This can be done by having a suitable random number generator create a 32-octet sequence. The octet sequence can then be base64url-encoded to produce a 43-octet URL safe string to use as a ""code_challenge"" that has the required entropy.
+
+7.2. Protection against Eavesdroppers
+
+Clients MUST NOT downgrade to ""plain"" after trying the ""S256"" method. Servers that support PKCE are required to support ""S256"", and servers that do not support PKCE will simply ignore the unknown ""code_verifier"". Because of this, an error when ""S256"" is presented can only mean that the server is faulty or that a MITM attacker is trying a downgrade attack.","[rfc7636-p008-B00 p8] 4. Protocol
+
+4.1. Client Creates a Code Verifier
+
+The client first creates a code verifier, ""code_verifier"", for each OAuth 2.0 [RFC6749] Authorization Request, in the following manner:
+
+code_verifier = high-entropy cryptographic random STRING using the unreserved characters [A-Z] / [a-z] / [0-9] / ""-"" / ""."" / ""_"" / ""~"" from Section 2.3 of [RFC3986], with a minimum length of 43 characters and a maximum length of 128 characters.
+
+ABNF for ""code_verifier"" is as follows.
+
+code-verifier = 43*128unreserved unreserved = ALPHA / DIGIT / ""-"" / ""."" / ""_"" / ""~"" ALPHA = %x41-5A / %x61-7A DIGIT = %x30-39
+
+NOTE: The code verifier SHOULD have enough entropy to make it impractical to guess the value. It is RECOMMENDED that the output of a suitable random number generator be used to create a 32-octet sequence. The octet sequence is then base64url-encoded to produce a 43-octet URL safe string to use as the code verifier.
+
+4.2. Client Creates the Code Challenge","[rfc7636-p017-B01 p17] The client uses output of a suitable random number generator to create a 32-octet sequence. The octets representing the value in this example (using JSON array notation) are:
+
+[116, 24, 223, 180, 151, 153, 224, 37, 79, 250, 96, 125, 216, 173, 187, 186, 22, 212, 37, 77, 105, 214, 191, 240, 91, 88, 5, 88, 83, 132, 141, 121]
+
+Encoding this octet sequence as base64url provides the value of the code_verifier:
+
+dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
+
+The code_verifier is then hashed via the SHA256 hash function to produce:
+
+[19, 211, 30, 150, 26, 26, 216, 236, 47, 22, 177, 12, 76, 152, 46,
+ 8, 118, 168, 120, 173, 109, 241, 68, 86, 110, 225, 137, 74, 203,
+ 112, 249, 195]",2,Identical chunks to B; minimum 256-bit entropy stated in top1.
+C,q22,How are the parts of a JSON web token separated?,By period characters; each part is base64url-encoded.,rfc7519 p6,A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters.,"[rfc7519-p006-B02 p6] The contents of the JOSE Header describe the cryptographic operations applied to the JWT Claims Set. If the JOSE Header is for a JWS, the JWT is represented as a JWS and the claims are digitally signed or MACed, with the JWT Claims Set being the JWS Payload. If the JOSE Header is for a JWE, the JWT is represented as a JWE and the claims are encrypted, with the JWT Claims Set being the plaintext encrypted by the JWE. A JWT may be enclosed in another JWE or JWS structure to create a Nested JWT, enabling nested signing and encryption to be performed.
+
+A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters. Each part contains a base64url-encoded value. The number of parts in the JWT is dependent upon the representation of the resulting JWS using the JWS Compact Serialization or JWE using the JWE Compact Serialization.","[rfc7519-p013-B00 p13] The following is an example of a JWT Claims Set:
+
+{""iss"":""joe"",
+ ""exp"":1300819380,
+ ""http://example.com/is_root"":true}
+
+Base64url encoding the octets of the UTF-8 representation of the JWT Claims Set yields this encoded JWS Payload (with line breaks for display purposes only):
+
+eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ
+
+The encoded JWS Signature is the empty string.
+
+Concatenating these encoded parts in this order with period ('.') characters between the parts yields this complete JWT (with line breaks for display purposes only):
+
+eyJhbGciOiJub25lIn0 . eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt cGxlLmNvbS9pc19yb290Ijp0cnVlfQ .
+
+7. Creating and Validating JWTs
+
+7.1. Creating a JWT
+
+To create a JWT, the following steps are performed. The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.","[rfc7519-p006-B01 p6] JWTs represent a set of claims as a JSON object that is encoded in a JWS and/or JWE structure. This JSON object is the JWT Claims Set. As per Section 4 of RFC 7159 [RFC7159], the JSON object consists of zero or more name/value pairs (or members), where the names are strings and the values are arbitrary JSON values. These members are the claims represented by the JWT. This JSON object MAY contain whitespace and/or line breaks before or after any JSON values or structural characters, in accordance with Section 2 of RFC 7159 [RFC7159].
+
+The member names within the JWT Claims Set are referred to as Claim Names. The corresponding values are referred to as Claim Values.",2,Identical chunks to B; period separation and base64url encoding in top1.

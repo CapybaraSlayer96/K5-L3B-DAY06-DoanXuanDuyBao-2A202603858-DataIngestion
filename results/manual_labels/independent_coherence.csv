@@ -1,0 +1,166 @@
+position,strategy,document_id,page,mid_offset,chunk_id,chunk_text,score_0_2,reason
+pos01,A,rfc6749,9,1227,rfc6749-p009-A02,"described in Sections 10.3 and 10.16, especially when the authorization code grant type is available.
+
+1.3.3. Resource Owner Password Credentials
+
+The resource owner password credentials (i.e., username and password) can be used directly as an authorization grant to obtain an access token. The credentials should only be used when there is a high degree of trust between the resource owner and the client (e.g., the client is part of the device operating system or a highly privileged application), ",0,"Opens mid-sentence (dangling ""described in"") and ends mid-clause; both edges cut."
+pos01,B,rfc6749,9,1227,rfc6749-p009-B01,"Implicit grants improve the responsiveness and efficiency of some clients (such as a client implemented as an in-browser application), since it reduces the number of round trips required to obtain an access token. However, this convenience should be weighed against the security implications of using implicit grants, such as those described in Sections 10.3 and 10.16, especially when the authorization code grant type is available.
+
+1.3.3. Resource Owner Password Credentials
+
+The resource owner password credentials (i.e., username and password) can be used directly as an authorization grant to obtain an access token. The credentials should only be used when there is a high degree of trust between the resource owner and the client (e.g., the client is part of the device operating system or a highly privileged application), and when other authorization grant types are not available (such as an authorization code).",2,Starts and ends on full sentences; implicit-grant tradeoff and password-grant rule complete.
+pos02,A,rfc6749,21,1091,rfc6749-p021-A02,", the authorization server SHOULD inform the resource owner of the error and MUST NOT automatically redirect the user-agent to the invalid redirection URI.
+
+3.1.2.5. Endpoint Content
+
+The redirection request to the client's endpoint typically results in an HTML document response, processed by the user-agent. If the HTML response is served directly as the result of the redirection request, any script included in the HTML document will execute with full access to the redirection URI and the creden",0,Opens with dangling comma fragment and ends mid-word; both edges cut.
+pos02,B,rfc6749,21,1091,rfc6749-p021-B01,"If an authorization request fails validation due to a missing, invalid, or mismatching redirection URI, the authorization server SHOULD inform the resource owner of the error and MUST NOT automatically redirect the user-agent to the invalid redirection URI.
+
+3.1.2.5. Endpoint Content
+
+The redirection request to the client's endpoint typically results in an HTML document response, processed by the user-agent. If the HTML response is served directly as the result of the redirection request, any script included in the HTML document will execute with full access to the redirection URI and the credentials it contains.",2,Full sentences at both ends; redirect error rule and script-access risk complete.
+pos03,A,rfc6749,32,596,rfc6749-p032-A01,"       |
+|          |          with Access Token     +---------------+
+|          |            in Fragment
+|          |                                +---------------+
+|          |----(D)--- Redirection URI ---->|   Web-Hosted  |
+|          |          without Fragment      |     Client    |
+|          |                                |    Resource   |
+|     (F)  |<---(E)------- Script ---------<|               |
+|          |                                +---------------+
++-|--------+
+  |    |",0,"Diagram fragment missing steps A-C and G, no text; both edges cut."
+pos03,B,rfc6749,32,596,rfc6749-p032-B00,"+----------+
+| Resource |
+|  Owner   |
+|          |
++----------+
+     ^
+     |
+    (B)
++----|-----+          Client Identifier     +---------------+
+|         -+----(A)-- & Redirection URI --->|               |
+|  User-   |                                | Authorization |
+|  Agent  -|----(B)-- User authenticates -->|     Server    |
+|          |                                |               |
+|          |<---(C)--- Redirection URI ----<|               |
+|          |          with Access Token     +---------------+
+|          |            in Fragment
+|          |                                +---------------+
+|          |----(D)--- Redirection URI ---->|   Web-Hosted  |
+|          |          without Fragment      |     Client    |
+|          |                                |    Resource   |
+|     (F)  |<---(E)------- Script ---------<|               |
+|          |                                +---------------+
++-|--------+
+  |    |
+ (A)  (G) Access Token
+  |    |
+  ^    v
++-------",1,Full diagram steps A-G but no caption or text; bottom box cut.
+pos04,A,rfc6749,43,970,rfc6749-p043-A02,"authorized, the authorization server issues an access token and optional refresh token as described in Section 5.1. If the request failed client authentication or is invalid, the authorization server returns an error response as described in Section 5.2.
+
+5.1. Successful Response
+
+The authorization server issues an access token and optional refresh token, and constructs the response by adding the following parameters to the entity-body of the HTTP response with a 200 (OK) status code:
+
+access_to",0,"Opens with dangling ""authorized,"" and ends mid-word ""access_to""; both edges cut."
+pos04,B,rfc6749,43,970,rfc6749-p043-B01,"If the access token request is valid and authorized, the authorization server issues an access token and optional refresh token as described in Section 5.1. If the request failed client authentication or is invalid, the authorization server returns an error response as described in Section 5.2.
+
+5.1. Successful Response
+
+The authorization server issues an access token and optional refresh token, and constructs the response by adding the following parameters to the entity-body of the HTTP response with a 200 (OK) status code:
+
+access_token
+      REQUIRED.  The access token issued by the authorization server.
+
+token_type
+      REQUIRED.  The type of the token issued as described in
+      Section 7.1.  Value is case insensitive.",2,Full sentences; access token response parameters through token_type complete.
+pos05,A,rfc6749,55,1094,rfc6749-p055-A02,"or the requested scope and MAY issue an access token with less rights than requested.
+
+This specification does not provide any methods for the resource server to ensure that an access token presented to it by a given client was issued to that client by the authorization server.
+
+10.4. Refresh Tokens
+
+Authorization servers MAY issue refresh tokens to web application clients and native application clients.
+
+Refresh tokens MUST be kept confidential in transit and storage, and shared only among the ",0,"Opens with dangling clause and ends mid-sentence ""shared only among the""; both edges cut."
+pos05,B,rfc6749,55,1094,rfc6749-p055-B01,"This specification does not provide any methods for the resource server to ensure that an access token presented to it by a given client was issued to that client by the authorization server.
+
+10.4. Refresh Tokens
+
+Authorization servers MAY issue refresh tokens to web application clients and native application clients.
+
+Refresh tokens MUST be kept confidential in transit and storage, and shared only among the authorization server and the client to whom the refresh tokens were issued. The authorization server MUST maintain the binding between a refresh token and the client to whom it was issued. Refresh tokens MUST only be transmitted using TLS as described in Section 1.6 with server authentication as defined by [RFC2818].",2,Full sentences at both ends; refresh-token binding and TLS rules complete.
+pos06,A,rfc6749,66,875,rfc6749-p066-A01,"or to publication, the Designated Expert(s) may approve registration once they are satisfied that such a specification will be published.
+
+Registration requests must be sent to the oauth-ext-review@ietf.org mailing list for review and comment, with an appropriate subject (e.g., ""Request for response type: example"").
+
+Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should incl",0,"Opens with dangling ""or to publication"" and ends mid-word; both edges cut."
+pos06,B,rfc6749,66,875,rfc6749-p066-B01,"Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful.
+
+IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
+
+11.3.1. Registration Template
+
+Response type name:
+   The name requested (e.g., ""example"").
+
+Change controller:
+   For Standards Track RFCs, state ""IETF"".  For others, give the name
+   of the responsible party.  Other details (e.g., postal address,
+   email address, home page URI) may also be included.
+
+Specification document(s):
+   Reference to the document(s) that specify the type, preferably
+   including a URI that can be used to retrieve a copy of the
+   document(s).  An indication of the relevant sections may also be
+   included but is not required.",2,Full sentences; registration review and template complete.
+pos07,A,rfc7519,4,1087,rfc7519-p004-A02,"s to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted. JWTs are always represented using the JWS Compact Serialization or the JWE Compact Serialization.
+
+The suggested pronunciation of JWT is the same as the English word ""jot"".
+
+1.1. Notational Conventions
+
+The key words ""MUST"", ""MUST NOT"", ""REQUIRED"", ""SHALL"", ""SHALL NOT"", ""SHOULD"", ""SHOULD NOT"", ""RECOMMENDED"", ""NOT RECOMMENDED"", ""MAY"", and ""OPTIONAL"" in this document are to be interpreted as ",0,Opens mid-word and loses the JWT definition; ends mid-clause; both edges cut.
+pos07,B,rfc7519,4,1087,rfc7519-p004-B01,"JSON Web Token (JWT) is a compact claims representation format intended for space constrained environments such as HTTP Authorization headers and URI query parameters. JWTs encode claims to be transmitted as a JSON [RFC7159] object that is used as the payload of a JSON Web Signature (JWS) [JWS] structure or as the plaintext of a JSON Web Encryption (JWE) [JWE] structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted. JWTs are always represented using the JWS Compact Serialization or the JWE Compact Serialization.
+
+The suggested pronunciation of JWT is the same as the English word ""jot"".
+
+1.1. Notational Conventions",2,JWT definition complete; ends on orphan heading 'Notational Conventions' with no body.
+pos08,A,rfc7519,15,1082,rfc7519-p015-A02,"t conforming to
+     RFC 7159 [RFC7159]; let the JWT Claims Set be this JSON object.
+
+Finally, note that it is an application decision which algorithms may be used in a given context. Even if a JWT can be successfully validated, unless the algorithms used in the JWT are acceptable to the application, it SHOULD reject the JWT.
+
+7.3. String Comparison Rules
+
+Processing a JWT inevitably requires comparing known strings to members and values in JSON objects. For example, in checking what the algorit",0,"Opens with fragment ""t conforming to"" and ends mid-word; both edges cut."
+pos08,B,rfc7519,15,1082,rfc7519-p015-B01,"Finally, note that it is an application decision which algorithms may be used in a given context. Even if a JWT can be successfully validated, unless the algorithms used in the JWT are acceptable to the application, it SHOULD reject the JWT.
+
+7.3. String Comparison Rules
+
+Processing a JWT inevitably requires comparing known strings to members and values in JSON objects. For example, in checking what the algorithm is, the Unicode [UNICODE] string encoding ""alg"" will be checked against the member names in the JOSE Header to see if there is a matching Header Parameter name.
+
+The JSON rules for doing member name comparison are described in Section 8.3 of RFC 7159 [RFC7159]. Since the only string comparison operations that are performed are equality and inequality, the same rules can be used for comparing both member names and member values against known strings.",2,Full sentences; algorithm-acceptance and string-comparison rules complete.
+pos09,A,rfc7519,29,1061,rfc7519-p029-A02,"JWTs was intentionally influenced by the design and simplicity of SWTs [SWT] and ideas for JSON tokens that Dick Hardt discussed within the OpenID community.
+
+Solutions for signing JSON content were previously explored by Magic Signatures [MagicSignatures], JSON Simple Sign [JSS], and Canvas Applications [CanvasApp], all of which influenced this document.
+
+This specification is the work of the OAuth working group, which includes dozens of active and dedicated participants. In particular, the fol",0,"Opens with fragment ""JWTs was"" and ends mid-word ""fol""; both edges cut."
+pos09,B,rfc7519,29,1061,rfc7519-p029-B01,"The authors acknowledge that the design of JWTs was intentionally influenced by the design and simplicity of SWTs [SWT] and ideas for JSON tokens that Dick Hardt discussed within the OpenID community.
+
+Solutions for signing JSON content were previously explored by Magic Signatures [MagicSignatures], JSON Simple Sign [JSS], and Canvas Applications [CanvasApp], all of which influenced this document.
+
+This specification is the work of the OAuth working group, which includes dozens of active and dedicated participants. In particular, the following individuals contributed ideas, feedback, and wording that influenced this specification:",1,Ends on list lead-in colon; contributor list absent.
+pos10,A,rfc7636,13,1045,rfc7636-p013-A02,"s of entropy. This can be done by having a suitable random number generator create a 32-octet sequence. The octet sequence can then be base64url-encoded to produce a 43-octet URL safe string to use as a ""code_challenge"" that has the required entropy.
+
+7.2. Protection against Eavesdroppers
+
+Clients MUST NOT downgrade to ""plain"" after trying the ""S256"" method. Servers that support PKCE are required to support ""S256"", and servers that do not support PKCE will simply ignore the unknown ""code_verifie",0,Opens mid-word and ends mid-word; 256-bit requirement sentence lost.
+pos10,B,rfc7636,13,1045,rfc7636-p013-B01,"The client SHOULD create a ""code_verifier"" with a minimum of 256 bits of entropy. This can be done by having a suitable random number generator create a 32-octet sequence. The octet sequence can then be base64url-encoded to produce a 43-octet URL safe string to use as a ""code_challenge"" that has the required entropy.
+
+7.2. Protection against Eavesdroppers
+
+Clients MUST NOT downgrade to ""plain"" after trying the ""S256"" method. Servers that support PKCE are required to support ""S256"", and servers that do not support PKCE will simply ignore the unknown ""code_verifier"". Because of this, an error when ""S256"" is presented can only mean that the server is faulty or that a MITM attacker is trying a downgrade attack.",2,Full sentences; 256-bit entropy requirement and downgrade rule complete.

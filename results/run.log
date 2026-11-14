@@ -1,0 +1,54 @@
+WARNING ingestion: skip rfc6749 p2: toc (3238 chars)
+WARNING ingestion: skip rfc6749 p3: toc (3206 chars)
+WARNING ingestion: skip rfc6749 p4: toc (2544 chars)
+WARNING ingestion: skip rfc6749 p69: references (2075 chars)
+WARNING ingestion: skip rfc6749 p70: references (912 chars)
+WARNING ingestion: skip rfc6749 p77: empty (0 chars)
+WARNING ingestion: skip rfc7519 p23: references (1847 chars)
+WARNING ingestion: skip rfc7519 p24: references (2106 chars)
+WARNING ingestion: skip rfc7519 p25: references (674 chars)
+WARNING ingestion: skip rfc7519 p30: references (288 chars)
+WARNING ingestion: skip rfc7519 p31: empty (0 chars)
+WARNING ingestion: skip rfc7636 p2: toc (2485 chars)
+WARNING ingestion: skip rfc7636 p16: references (665 chars)
+WARNING ingestion: skip rfc7636 p20: references (547 chars)
+WARNING ingestion: skip rfc7636 p21: empty (0 chars)
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"
+INFO httpx2: HTTP Request: POST https://api.shopaikey.com/v1/models/gemini-embedding-001:batchEmbedContents "HTTP/1.1 200 OK"

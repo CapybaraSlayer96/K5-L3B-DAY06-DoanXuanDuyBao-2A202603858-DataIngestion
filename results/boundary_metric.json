@@ -1,0 +1,14 @@
+{
+  "A": {
+    "chunks": 511,
+    "clean_start": 129,
+    "clean_end": 124,
+    "both_clean_share_upper_bound": 0.243
+  },
+  "B": {
+    "chunks": 290,
+    "clean_start": 286,
+    "clean_end": 286,
+    "both_clean_share_upper_bound": 0.986
+  }
+}

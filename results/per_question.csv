@@ -1,0 +1,67 @@
+strategy,id,split,type,filter,hit1,hit3,first_hit_rank,page_match_top3,top1,gold
+A,q01,dev,paraphrase,null,True,True,1,True,rfc6749 p26,rfc6749 p26
+A,q02,dev,direct,null,True,True,1,True,rfc6749 p56,rfc6749 p56
+A,q03,dev,conditional,null,True,True,1,True,rfc6749 p41,rfc6749 p41
+A,q04,dev,conditional,null,False,True,2,True,rfc6749 p10,rfc6749 p35
+A,q05,dev,direct,null,True,True,1,True,rfc6749 p16,rfc6749 p16
+A,q06,dev,conditional,null,False,True,3,True,rfc6749 p21,rfc6749 p21
+A,q07,dev,paraphrase,null,True,True,1,True,rfc6749 p22,rfc6749 p22
+A,q08,dev,conditional,null,False,False,,True,rfc6749 p40,rfc6749 p40
+A,q09,dev,direct,null,False,True,3,True,rfc7636 p10,rfc6749 p45
+A,q10,dev,filter,null,False,True,2,True,rfc7519 p10,rfc7519 p9
+A,q11,dev,conditional,null,True,True,1,True,rfc7519 p9,rfc7519 p9
+A,q12,dev,paraphrase,null,False,True,2,True,rfc7519 p10,rfc7519 p10
+A,q13,dev,direct,null,True,True,1,True,rfc7519 p12,rfc7519 p12
+A,q14,dev,conditional,null,True,True,1,True,rfc7519 p11,rfc7519 p11
+A,q15,dev,filter,null,False,True,2,True,rfc6749 p16,rfc7636 p8
+A,q16,dev,conditional,null,False,False,,True,rfc7636 p8,rfc7636 p8
+A,q17,dev,filter,null,True,True,1,True,rfc6749 p18,rfc6749 p18
+A,q18,test,conditional,null,False,True,2,True,rfc6749 p59,rfc6749 p59
+A,q19,test,conditional,null,False,False,,False,rfc6749 p22,rfc6749 p42
+A,q20,test,filter,null,False,False,,False,rfc7636 p13,rfc7636 p10
+A,q21,test,paraphrase,null,True,True,1,True,rfc7636 p13,rfc7636 p13
+A,q22,test,direct,null,False,True,2,True,rfc7519 p6,rfc7519 p6
+B,q01,dev,paraphrase,null,True,True,1,True,rfc6749 p26,rfc6749 p26
+B,q02,dev,direct,null,True,True,1,True,rfc6749 p56,rfc6749 p56
+B,q03,dev,conditional,null,True,True,1,True,rfc6749 p41,rfc6749 p41
+B,q04,dev,conditional,null,False,True,2,True,rfc6749 p10,rfc6749 p35
+B,q05,dev,direct,null,True,True,1,True,rfc6749 p16,rfc6749 p16
+B,q06,dev,conditional,null,True,True,1,True,rfc6749 p21,rfc6749 p21
+B,q07,dev,paraphrase,null,True,True,1,True,rfc6749 p58,rfc6749 p22
+B,q08,dev,conditional,null,True,True,1,True,rfc6749 p40,rfc6749 p40
+B,q09,dev,direct,null,True,True,1,True,rfc6749 p45,rfc6749 p45
+B,q10,dev,filter,null,True,True,1,True,rfc7519 p9,rfc7519 p9
+B,q11,dev,conditional,null,True,True,1,True,rfc7519 p9,rfc7519 p9
+B,q12,dev,paraphrase,null,True,True,1,True,rfc7519 p10,rfc7519 p10
+B,q13,dev,direct,null,True,True,1,True,rfc7519 p12,rfc7519 p12
+B,q14,dev,conditional,null,True,True,1,True,rfc7519 p11,rfc7519 p11
+B,q15,dev,filter,null,False,True,2,True,rfc6749 p16,rfc7636 p8
+B,q16,dev,conditional,null,True,True,1,True,rfc7636 p8,rfc7636 p8
+B,q17,dev,filter,null,True,True,1,True,rfc6749 p18,rfc6749 p18
+B,q18,test,conditional,null,False,False,,True,rfc6749 p59,rfc6749 p59
+B,q19,test,conditional,null,False,False,,False,rfc6749 p22,rfc6749 p42
+B,q20,test,filter,null,False,False,,False,rfc7636 p9,rfc7636 p10
+B,q21,test,paraphrase,null,True,True,1,True,rfc7636 p13,rfc7636 p13
+B,q22,test,direct,null,True,True,1,True,rfc7519 p6,rfc7519 p6
+C,q01,dev,paraphrase,null,True,True,1,True,rfc6749 p26,rfc6749 p26
+C,q02,dev,direct,null,True,True,1,True,rfc6749 p56,rfc6749 p56
+C,q03,dev,conditional,null,True,True,1,True,rfc6749 p41,rfc6749 p41
+C,q04,dev,conditional,null,False,True,2,True,rfc6749 p10,rfc6749 p35
+C,q05,dev,direct,null,True,True,1,True,rfc6749 p16,rfc6749 p16
+C,q06,dev,conditional,null,True,True,1,True,rfc6749 p21,rfc6749 p21
+C,q07,dev,paraphrase,null,True,True,1,True,rfc6749 p58,rfc6749 p22
+C,q08,dev,conditional,null,True,True,1,True,rfc6749 p40,rfc6749 p40
+C,q09,dev,direct,null,True,True,1,True,rfc6749 p45,rfc6749 p45
+C,q10,dev,filter,"{""document_id"": ""rfc7519""}",True,True,1,True,rfc7519 p9,rfc7519 p9
+C,q11,dev,conditional,null,True,True,1,True,rfc7519 p9,rfc7519 p9
+C,q12,dev,paraphrase,null,True,True,1,True,rfc7519 p10,rfc7519 p10
+C,q13,dev,direct,null,True,True,1,True,rfc7519 p12,rfc7519 p12
+C,q14,dev,conditional,null,True,True,1,True,rfc7519 p11,rfc7519 p11
+C,q15,dev,filter,"{""year"": 2015}",True,True,1,True,rfc7636 p8,rfc7636 p8
+C,q16,dev,conditional,null,True,True,1,True,rfc7636 p8,rfc7636 p8
+C,q17,dev,filter,"{""year"": 2012}",True,True,1,True,rfc6749 p18,rfc6749 p18
+C,q18,test,conditional,null,False,False,,True,rfc6749 p59,rfc6749 p59
+C,q19,test,conditional,null,False,False,,False,rfc6749 p22,rfc6749 p42
+C,q20,test,filter,"{""document_id"": ""rfc7636""}",False,False,,False,rfc7636 p9,rfc7636 p10
+C,q21,test,paraphrase,null,True,True,1,True,rfc7636 p13,rfc7636 p13
+C,q22,test,direct,null,True,True,1,True,rfc7519 p6,rfc7519 p6

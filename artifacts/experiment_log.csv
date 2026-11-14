@@ -1,4 +1,4 @@
 strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+A,fixed_size chars,500,50,"document_id,source,page,section,year,topic,start,end",none,gemini-embedding-001 768d cosine,Small fixed windows give precise but fragmented evidence,9/17,15/17,1/5,3/5,511 chunks; evidence often split across windows
+B,by_paragraph pack,1000,0,same as A,none,same,Paragraph packing keeps clauses whole so Hit@1 rises,15/17,17/17,2/5,2/5,290 chunks; test misses q18 q19 q20
+C,by_paragraph pack (same index as B),1000,0,same as A,"document_id/year from question context only on filter questions",same,Metadata filter removes cross-document distractors,16/17,17/17,2/5,2/5,filter on 4 of 22 questions; unfiltered questions identical to B
