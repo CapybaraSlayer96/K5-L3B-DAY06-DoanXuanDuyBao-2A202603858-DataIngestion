@@ -45,3 +45,15 @@ Dùng cùng dữ liệu, model và câu hỏi cho cả ba cấu hình. Tách **1
 | Cách nộp bài | [SUBMISSION.md](SUBMISSION.md) |
 
 [data/format-example.json](data/format-example.json) chỉ minh họa định dạng, không phải corpus đủ điều kiện. Phần xử lý và benchmark do bạn tự hiện thực; không bắt buộc xây chatbot.
+
+## Bài làm (Đoàn Xuân Duy Bảo · 2A202603858)
+
+Corpus: RFC 6749 / 7519 / 7636 (114 trang nội dung). Embedding Gemini `gemini-embedding-001` (768d) + PostgreSQL/pgvector. Chạy từ `starter/`:
+
+```bash
+python -m pip install -r requirements.txt
+docker compose -p day6_student_starter up -d --wait
+python -m src.run
+```
+
+Cần `GEMINI_API_KEY`, `GEMINI_BASE_URL` trong file env của `starter/` (mẫu: `starter/.env.example`). Kết quả: `results/`, benchmark: `benchmark/`, manifest: `data/manifest.json`, báo cáo: `report/individual/`. Nhãn thủ công: `results/manual_labels/`. Test: `cd starter && python -m pytest tests -q`.
